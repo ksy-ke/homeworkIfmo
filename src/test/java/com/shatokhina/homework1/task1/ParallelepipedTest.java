@@ -1,10 +1,8 @@
-package shatokhina;
+package com.shatokhina.homework1.task1;
 
-
-import com.shatokhina.homework1.task1.Parallelepiped;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class ParallelepipedTest {
 
@@ -30,7 +28,7 @@ public class ParallelepipedTest {
         int width = 35;
 
         // when
-            Parallelepiped parallelepiped = new Parallelepiped(height, length, width);
+        Parallelepiped parallelepiped = new Parallelepiped(height, length, width);
 
         // then
         // Exception thrown

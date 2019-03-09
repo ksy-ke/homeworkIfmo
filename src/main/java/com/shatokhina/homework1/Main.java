@@ -18,8 +18,8 @@ public class Main {
 
         // for task #2
         System.out.println("\n" + "Task #2");
-        GardenPlot gardenPlot = new GardenPlot();
-        System.out.println("Not occupied " + gardenPlot.getRemainder() + " meters squared");
+        GardenPlot gardenPlot = new GardenPlot(50, 20);
+        System.out.println("Not occupied " + gardenPlot.remainderArea(15, 20) + " meters squared");
 
         // for task #3
         System.out.println("\n" + "Task #3");
