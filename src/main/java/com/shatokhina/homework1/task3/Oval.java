@@ -18,5 +18,6 @@ public class Oval {
 
     public int minus(Oval that) {
         if (this.area <= that.area){ throw new IllegalArgumentException("Can't subtract a larger oval"); }
-        return this.area - that.area; }
+        return this.area - that.area;
+    }
 }

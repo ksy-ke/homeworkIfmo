@@ -9,10 +9,10 @@ import com.shatokhina.homework1.task6.Tally;
 
 import java.util.Optional;
 
-public class Main {
+public class MainHomework1 {
     public static void main(String[] args) {
         // for task #1
-        System.out.println("Task #1");
+        System.out.println(" Task #1");
         Parallelepiped parallelepiped = new Parallelepiped(23, 53, 93);
         System.out.println("Area = " + parallelepiped.area());
         if (parallelepiped.isWidth()) {
@@ -24,7 +24,7 @@ public class Main {
         // for task #2
         System.out.println("\n Task #2");
         GardenPlot gardenPlot = new GardenPlot(50, 20);
-        System.out.println("Not occupied " + gardenPlot.remainderArea(15, 20) + " meters squared");
+        System.out.println("Not occupied " + gardenPlot.remainderArea(15, 25) + " meters squared");
 
         // for task #3
         System.out.println("\n Task #3");
