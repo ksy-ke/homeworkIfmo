@@ -10,11 +10,12 @@ import static java.util.stream.IntStream.of;
 public class Task4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int sizeArray = scanner.nextInt();
-        while (sizeArray <= 0 || sizeArray % 2 != 0) {
-            System.out.println("Invalid value. Enter new");
+        int sizeArray;
+        do {
+            System.out.println("Enter a positive even number: ");
             sizeArray = scanner.nextInt();
         }
+        while (sizeArray <= 0 || sizeArray % 2 != 0);
         int[] randomNumbers = IntStream.generate(() -> ThreadLocalRandom.current().nextInt(-5, 6))
                 .limit(sizeArray)
                 .toArray();
@@ -26,7 +27,7 @@ public class Task4 {
 
         if (left > right) {
             System.out.println("The left side of the array is large");
-        } else if(right > left) {
+        } else if (right > left) {
             System.out.println("The right side of the array is large");
         } else {
             System.out.println("The parts of the array are equal");
