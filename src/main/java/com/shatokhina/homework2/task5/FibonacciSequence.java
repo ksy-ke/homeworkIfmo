@@ -12,7 +12,7 @@ public class FibonacciSequence {
     }
 
     private void fibonacci() {
-        for (int current = 0; current <= howMany - 1; current++) {
+        for (int current = 0; current < howMany; current++) {
             if (current <= 1) {
                 sequence[current] = 1;
                 continue;
