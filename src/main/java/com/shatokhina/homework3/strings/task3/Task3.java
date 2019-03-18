@@ -6,8 +6,6 @@ import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 public class Task3 {
-
-
     public static void main(String[] args) {
         var input = new Scanner(System.in).nextLine();
         int[] numbers = Pattern.compile("\\d+").matcher(input)

@@ -56,7 +56,7 @@ public class MainHomework1 {
 
         // for task #6
         System.out.println("\n Task #6");
-        int baseNum = 795;
+        int baseNum = 593576023;
         Tally tally = new Tally(baseNum);
         System.out.println("In " + baseNum + " max numeric is " + tally.findMax());
     }
