@@ -4,14 +4,16 @@ import static java.lang.Math.sqrt;
 import static java.util.Objects.requireNonNull;
 
 public class Line {
-    private final double line;
+    private final int lineX;
+    private final int lineY;
+    private final double length;
 
     public Line(Point a, Point b) {
         requireNonNull(a);
         requireNonNull(b);
-        int lineX = b.getX() - a.getX();
-        int lineY = b.getY() - a.getY();
-        line = sqrt(lineX * lineX + lineY * lineY);
+        lineX = b.getX() - a.getX();
+        lineY = b.getY() - a.getY();
+        length = sqrt(lineX * lineX + lineY * lineY);
     }
 
     @Override
@@ -19,8 +21,10 @@ public class Line {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         var that = (Line) o;
-        return this.line == that.line;
+        return this.length == that.length;
     }
 
-    public double getLength() { return line; }
+    public double doubleTriangleAreaWith(Line that) { return (this.lineX * that.lineY - that.lineX * this.lineY); }
+
+    public double getLength() { return length; }
 }
