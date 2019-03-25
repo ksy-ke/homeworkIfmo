@@ -1,27 +1,43 @@
 package com.shatokhina.controlwork;
 
-import java.util.*;
+import com.shatokhina.controlwork.doctors.Doctor;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 
 public class Administrator {
-    private static Set<String> doctors = new HashSet<>();
-    private Set<String> patients = new HashSet<>();
-    private Map<Record, String> visits = new HashMap<>();
+    private final static Administrator ADMINISTRATOR = new Administrator();
+    private Map<String, Doctor> doctors = new HashMap<>();
+    private Map<String, Patient> patients = new HashMap<>();
+    private Map<LocalDateTime, Patient> recordsToTherapist = new HashMap<>();
+    private Map<LocalDateTime, Patient> recordsToSurgeon = new HashMap<>();
+    private Map<LocalDateTime, Patient> recordsToNeurologist = new HashMap<>();
 
-    static {
-        doctors.add("head");
-        doctors.add("therapist");
-        doctors.add("surgeon");
-        doctors.add("neurologist");
+    private Administrator() {
+        doctors.put("head", new Doctor("head"));
+        doctors.put("therapist", new Doctor("therapist"));
+        doctors.put("surgeon", new Doctor("surgeon"));
+        doctors.put("neurologist", new Doctor("neurologist"));
     }
 
-    public void registration(String login) {
+    public void authorizePatient(String login) {
         requireNonNull(login);
-        patients.add(login);
+        patients.put(login, patients.computeIfAbsent(login, Patient::new));
     }
 
-    public static Set<String> getDoctors() { return doctors; }
+    public static Administrator getAdministrator() { return ADMINISTRATOR; }
 
-    public Map<Record, String> getVisits() { return visits; }
+    public Map<String, Doctor> getDoctors() { return doctors; }
+
+    public Map<String, Patient> getPatients() { return patients; }
+
+    public Map<LocalDateTime, Patient> getRecordsToTherapist() { return recordsToTherapist; }
+
+    public Map<LocalDateTime, Patient> getRecordsToSurgeon() { return recordsToSurgeon; }
+
+    public Map<LocalDateTime, Patient> getRecordsToNeurologist() { return recordsToNeurologist; }
 }
