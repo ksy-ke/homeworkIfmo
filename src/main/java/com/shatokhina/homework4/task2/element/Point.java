@@ -15,11 +15,6 @@ public final class Point {
 
     public int getY() { return y; }
 
-    public boolean equalsForTriangle(Point first, Point second) {
-        if (equals(first) || equals(second)) return true;
-        return ((this.x == first.x && this.x == second.x) || (this.y == first.y && this.y == second.y));
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

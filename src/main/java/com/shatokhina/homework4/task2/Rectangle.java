@@ -7,10 +7,18 @@ import static java.util.Objects.requireNonNull;
 
 public class Rectangle implements Shape {
     private final Line ab;
-    private final Line cd;
+    private final Line bc;
     private double area;
     private double perimeter;
 
+    /**
+     * @param a nonnull left top point
+     * @param b nonnull right top point
+     * @param c nonnull right bot point
+     * @param d nonnull left bot point
+     * @throws IllegalArgumentException the passed points can't create a rectangle
+     * @throws NullPointerException     the passed point is null
+     */
     public Rectangle(Point a, Point b, Point c, Point d) {
         requireNonNull(a);
         requireNonNull(b);
@@ -23,15 +31,15 @@ public class Rectangle implements Shape {
         Line bd = new Line(b, d);
         if (!(ab.equals(cd) && ac.equals(bd))) { throw new IllegalArgumentException("It's not rectangle"); }
         this.ab = ab;
-        this.cd = cd;
+        this.bc = new Line(b, c);
     }
 
     @Override
-    public double getArea() { return area != 0 ? area : (area = ab.getLength() * cd.getLength()); }
+    public double getArea() { return area != 0 ? area : (area = ab.getLength() * bc.getLength()); }
 
     @Override
     public double getPerimeter() {
         return perimeter != 0 ? perimeter :
-                (perimeter = 2 * (ab.getLength() + cd.getLength()));
+                (perimeter = 2 * (ab.getLength() + bc.getLength()));
     }
 }
