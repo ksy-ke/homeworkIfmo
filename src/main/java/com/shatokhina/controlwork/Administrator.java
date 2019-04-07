@@ -43,9 +43,7 @@ public class Administrator {
         if (!checkRecord(doc, patient)) {
             LocalDateTime dateTime = collectedDateTime();
 
-            Patient check = isBusy(doc, dateTime, patient);
-            boolean busy = !check.equals(patient);
-            while (busy) {
+            while (!isBusy(doc, dateTime, patient).equals(patient)) {
                 System.out.println("This time is busy, enter another");
                 dateTime = collectedDateTime();
             }
@@ -79,31 +77,29 @@ public class Administrator {
     private boolean checkRecord(String doc, Patient patient) {
         switch (doc) {
             case "neurologist":
-                Optional<LocalDateTime> recordToNeurologist = patient.getRecordToNeurologist();
-                recordToNeurologist.ifPresent(localDateTime -> System.out.println("You are already registered to this doctor on " + localDateTime));
-                return recordToNeurologist.isPresent();
+                return patient.getRecordToNeurologist().map(this::tellIfPresent).orElse(false);
             case "therapist":
-                Optional<LocalDateTime> recordToTherapist = patient.getRecordToTherapist();
-                recordToTherapist.ifPresent(localDateTime ->
-                        System.out.println("You are already registered to this doctor on " + localDateTime));
-                return recordToTherapist.isPresent();
+                return patient.getRecordToTherapist().map(this::tellIfPresent).orElse(false);
             case "surgeon":
-                Optional<LocalDateTime> recordToSurgeon = patient.getRecordToSurgeon();
-                recordToSurgeon.ifPresent(localDateTime -> System.out.println("You are already registered to this doctor on " + localDateTime));
-                return recordToSurgeon.isPresent();
+                return patient.getRecordToSurgeon().map(this::tellIfPresent).orElse(false);
             default:
                 throw new IllegalStateException();
         }
     }
 
-    private Patient isBusy(String doc, LocalDateTime dateTime, Patient patient) {
+    private boolean tellIfPresent(LocalDateTime dateTime) {
+        System.out.println("You are already registered to this doctor on " + dateTime);
+        return true;
+    }
+
+    private Patient isBusy(String doc, LocalDateTime requested, Patient patient) {
         switch (doc) {
             case "neurologist":
-                return recordsToNeurologist.putIfAbsent(dateTime, patient);
+                return recordsToNeurologist.computeIfAbsent(requested, dateTime -> patient);
             case "therapist":
-                return recordsToTherapist.putIfAbsent(dateTime, patient);
+                return recordsToTherapist.computeIfAbsent(requested, dateTime -> patient);
             case "surgeon":
-                return recordsToSurgeon.putIfAbsent(dateTime, patient);
+                return recordsToSurgeon.computeIfAbsent(requested, dateTime -> patient);
             default:
                 throw new IllegalStateException();
         }

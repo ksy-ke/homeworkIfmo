@@ -12,9 +12,9 @@ public class Patient {
     public Patient(String login) { this.login = login; }
 
     void viewRecords() {
-        System.out.println("Record to therapist" + (recordToTherapist != null ? recordToTherapist : " is missing"));
-        System.out.println("Record to surgeon" + (recordToSurgeon != null ? recordToSurgeon : " is missing"));
-        System.out.println("Record to neurologist" + (recordToNeurologist != null ? recordToNeurologist : " is missing"));
+        System.out.println("Record to therapist " + (recordToTherapist != null ? recordToTherapist : " is missing"));
+        System.out.println("Record to surgeon " + (recordToSurgeon != null ? recordToSurgeon : " is missing"));
+        System.out.println("Record to neurologist " + (recordToNeurologist != null ? recordToNeurologist : " is missing"));
     }
 
     public void setRecord(String doc, LocalDateTime dateTime) {
@@ -41,12 +41,12 @@ public class Patient {
     }
 
     public Optional<LocalDateTime> getRecordToSurgeon() {
-        if (recordToSurgeon.isBefore(LocalDateTime.now())) recordToSurgeon = null;
+        if (recordToSurgeon != null && recordToSurgeon.isBefore(LocalDateTime.now())) recordToSurgeon = null;
         return Optional.ofNullable(recordToSurgeon);
     }
 
     public Optional<LocalDateTime> getRecordToNeurologist() {
-        if (recordToNeurologist.isBefore(LocalDateTime.now())) recordToNeurologist = null;
+        if (recordToNeurologist != null && recordToNeurologist.isBefore(LocalDateTime.now())) recordToNeurologist = null;
         return Optional.ofNullable(recordToNeurologist);
     }
 }

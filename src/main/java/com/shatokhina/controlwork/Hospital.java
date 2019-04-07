@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Hospital {
     private static Administrator administrator = Administrator.getAdministrator();
     private static Scanner scanner = new Scanner(System.in);
-    boolean isClose = false;
+    private boolean isClose = false;
 
     public void open() {
         while (!isClose) {
@@ -84,10 +84,10 @@ public class Hospital {
                     break;
                 case "2":
                     boolean isAppointment = administrator.makeAppointment(patient);
-                    while (!isAppointment) {
-                        System.out.println("Choose another doctor? Y/N");
+                    while (isAppointment) {
+                        System.out.println("You are recorded to the doctor. Choose another doctor? Y/N");
                         if (scanner.nextLine().equals("Y")) isAppointment = administrator.makeAppointment(patient);
-                        else return;
+                        else break;
                     }
                     break;
                 case "0":
