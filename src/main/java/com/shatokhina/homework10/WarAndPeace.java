@@ -22,6 +22,7 @@ public class WarAndPeace {
             streamLines = Files.lines(path)
                     .map(String::toLowerCase);
         } catch (IOException e) { e.printStackTrace(); }
+
         return streamLines;
     }
 
@@ -31,11 +32,8 @@ public class WarAndPeace {
                 .flatMap(WarAndPeace::literalInString)
                 .forEach(literal -> letters.merge(literal, 1.0, Double::sum));
 
-        int sum = 0;
-        for (Double d : letters.values()) sum += d;
-
-        final double totalNumber = sum;
-        letters.forEach((key, value) -> letters.put(key, value * 100 / totalNumber));
+        double sum = letters.values().stream().reduce(0.0, (count, value) -> count + value);
+        letters.forEach((key, value) -> letters.put(key, value * 100 / sum));
 
         return letters;
     }
